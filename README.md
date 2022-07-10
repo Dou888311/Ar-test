@@ -4,6 +4,8 @@
 1) При наличии грейдла, клонируете репозиторий, переходите в директорию проекта - gradle bootRun или через вашу IDE.
 2) Docker: docker run -p 8080:8080 dou888311/artplan
 
+так же ссылка на репозиторий с приложенной задачей на реверс строки: https://github.com/Dou888311/razminka
+
 ### API 
 
 ### POST ```/api/user/registration```
