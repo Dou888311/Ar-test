@@ -11,4 +11,5 @@ import java.util.List;
 public interface AnimalRepository extends JpaRepository<Animal, String> {
 
     Animal findAnimalById(String id);
+    Boolean existsByName(String name);
 }

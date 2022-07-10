@@ -7,7 +7,6 @@
 </head>
 <body>
 <div>
-    <h3>${pageContext.request.userPrincipal.name}</h3>
     <authorize access="isAuthenticated()">
         <h4><a href="/myanimals">Мои животные</a></h4>
         <br>

@@ -5,6 +5,7 @@ import com.Dou888311.ArtPlanTest.DTO.AnimalDTO;
 import com.Dou888311.ArtPlanTest.Entity.Animal;
 import com.Dou888311.ArtPlanTest.Exceptions.AnimalRightsException;
 import com.Dou888311.ArtPlanTest.Exceptions.NoSuchAnimalException;
+import com.Dou888311.ArtPlanTest.Exceptions.UsernameAlreadyExists;
 import com.Dou888311.ArtPlanTest.Repository.AnimalRepository;
 import com.Dou888311.ArtPlanTest.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,15 @@ public class AnimalService {
     UserRepository userRepository;
 
     public Map<String, String> animalRegistration(Animal animal, UserDetailsImpl userDetails) {
-        animal.setUser(userRepository.findUserByUsername(userDetails.getUsername()));
-        UUID uuid = UUID.randomUUID();
-        animal.setId(uuid.toString());
-        animalRepository.save(animal);
-        return Map.of("Your Animal id", animal.getId());
+        if (!animalRepository.existsByName(animal.getName())) {
+            animal.setUser(userRepository.findUserByUsername(userDetails.getUsername()));
+            UUID uuid = UUID.randomUUID();
+            animal.setId(uuid.toString());
+            animalRepository.save(animal);
+            return Map.of("Your Animal id", animal.getId());
+        } else {
+            throw new UsernameAlreadyExists("Current animal name is already taken. Registration failed.");
+        }
     }
 
     public Animal findAnimal(AnimalDTO animal) {
