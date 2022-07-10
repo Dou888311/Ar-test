@@ -6,17 +6,29 @@
 ### POST ```/api/user/registration```
 Example Request:
 
-![image](https://user-images.githubusercontent.com/91428346/178154625-1be536cf-90c1-4271-90c2-a80fb49c46ab.png)
+Consumes JSON:
+```javascript
+{
+  "username": "admin", // Must not unique. If not, app throw 400 BAD_REQUEST
+  "password": "supersecret" 
+}
+```
 
 Response:
 
 1) If name is already taken
 
-![image](https://user-images.githubusercontent.com/91428346/178154680-2af73db1-3797-458b-90e5-5497ab1664d1.png)
+```javascript
+{
+ "error":"Your username is already taken. Registration failed."
+}
+```
 
 2) If name is free
 
-![image](https://user-images.githubusercontent.com/91428346/178154696-e95d51ff-be97-494e-9c31-819b70c51f85.png)
+```javascript
+ Your user id is: 14
+```
 
 ### Post ```/api/animal/registration```
 
@@ -25,22 +37,43 @@ Response:
 
 Example Request: 
 
-![image](https://user-images.githubusercontent.com/91428346/178154749-da08f4c5-c4d7-454d-a9da-3564f4af3718.png)
-
+```javascript
+{
+    "gender":"FEMALE",
+    "birthDate":"2022-07-10",
+    "name":"f44",
+    "kind":"Cat"
+}
+```
 
 Response: 
 
-![image](https://user-images.githubusercontent.com/91428346/178154754-b912e332-6f5f-4180-8499-0afb8a6f4ff5.png)
+```javascript
+{
+    "Your Animal id": "d7355120-bbf6-40f6-981d-6084f368d037"
+}
+```
 
 
-Request:
+Repeatable Request:
 
-![image](https://user-images.githubusercontent.com/91428346/178154814-d24105f3-c3df-4a07-b389-b7692840e67a.png)
+```javascript
+{
+    "gender":"FEMALE",
+    "birthDate":"2022-07-10",
+    "name":"f44g",
+    "kind":"Cat"
+}
+```
 
 
 Response:
 
-![image](https://user-images.githubusercontent.com/91428346/178154818-96965d53-2721-4ff8-b4ee-809a12693380.png)
+```javascript
+{
+    "error": "Current animal name is already taken. Registration failed."
+}
+```
 
 ### Put ```/api/animal/update/{id}```
 
@@ -50,31 +83,72 @@ Response:
 
 #### Put и Delete методы будут обрабатывать запрос, только если попытка изменить\удалить свое животное. 
 
-![image](https://user-images.githubusercontent.com/91428346/178154956-1b16e1c8-8925-4243-aac1-7accd53efb96.png)
+```javascript
+{
+    "error": "Animal with id: f0203d4c-367a-44df-a910-f971e1b2fc17is not yours. You can`t update him. Update failing."
+}
+```
 
 
 ### Get ```/api/animal/showall```
 
 Показывает список всех ваших животных.
 
-![image](https://user-images.githubusercontent.com/91428346/178155000-2837e463-bbad-4166-9bbf-9bdda818e7d0.png)
+```javascript
+[
+    {
+        "id": "737cc79b-aced-485c-b77b-7086e8b9929f",
+        "birthDate": "2022-07-09",
+        "gender": "FEMALE",
+        "name": "cat14564",
+        "kind": "Cat"
+    },
+    {
+        "id": "932afc42-8b92-4162-aff6-a597db2ab4c7",
+        "birthDate": "2022-07-09",
+        "gender": "FEMALE",
+        "name": "cat1",
+        "kind": "Cat"
+    }
+]
+```
 
 
-### Get ```/api/animal/find```
+### Post ```/api/animal/find```
+
+показывает животное по переданному айди
 
 Request 
 
-![image](https://user-images.githubusercontent.com/91428346/178155058-6b5db8a6-9704-4c7a-b40d-9d70a680731a.png)
+```javascript
+{
+    "id":"737cc79b-aced-485c-b77b-7086e8b9929f"
+}
+```
 
 
 Response 
 
-![image](https://user-images.githubusercontent.com/91428346/178155068-e62b238e-210d-4c3e-95cd-6dd3a63e8849.png)
+```javascript
+{
+    "id": "737cc79b-aced-485c-b77b-7086e8b9929f",
+    "birthDate": "2022-07-09",
+    "gender": "FEMALE",
+    "name": "cat14564",
+    "kind": "Cat"
+}
+```
 
 
 ### WEB
 
 ![image](https://user-images.githubusercontent.com/91428346/178155209-bdc90cbf-4752-488f-bdb6-7b56f8bcf79f.png)
+
+![image](https://user-images.githubusercontent.com/91428346/178155874-e9d8edcb-85d9-41c8-a0c5-d943f6231d0b.png)
+
+
+![image](https://user-images.githubusercontent.com/91428346/178155893-618bd37b-4dad-4e73-97c6-8e849cd41808.png)
+
 
 
 
