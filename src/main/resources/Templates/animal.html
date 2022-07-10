@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Главная</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
+</head>
+<body>
+<div>
+    <h3>${pageContext.request.userPrincipal.name}</h3>
+    <authorize access="isAuthenticated()">
+        <h4><a href="/myanimals">Мои животные</a></h4>
+        <br>
+        <h4><a href="/findanimal">Поиск животного по айди</a></h4>
+        <h4><a href="/addanimal">Зарегистрировать животное</a></h4>
+
+        <h4><a href="/">Вернуться</a></h4>
+    </authorize>
+</div>
+</body>
+</html>

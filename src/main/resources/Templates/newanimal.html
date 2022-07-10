@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+<form>
+    <br>
+    <label>Name<input id="animal_name" type="text"/></label>
+    <br>
+    <label>Birthday<input id="birth_day" type="date"/></label>
+    <br>
+    <label>Gender<input id="gender" type="text" placeholder="MALE or FEMALE"/></label>
+    <br>
+    <label>Kind<input id="kind" type="text"/></label>
+    <br>
+    <button id="send_snippet" type="submit" onclick="send()">Submit</button>
+    <br>
+    <h4><a href="/">Вернуться</a></h4>
+</form>
+<script>
+  function send() {
+    let object = {
+        "name": document.getElementById("animal_name").value,
+        "birthDate": document.getElementById("birth_day").value,
+        "gender": document.getElementById("gender").value,
+        "kind": document.getElementById("kind").value
+
+    };
+
+    let json = JSON.stringify(object);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", '/api/animal/registration', false)
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.send(json);
+
+    if (xhr.status == 200) {
+      alert("Registration complete");
+    }
+    if (xhr.status == 400) {
+      alert(xhr.response);
+    }
+}
+
+</script>
+</body>
+</html>

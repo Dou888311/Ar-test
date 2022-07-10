@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+<form>
+    <br>
+    <label>Id<input id="id" type="text"/></label>
+    <br>
+    <button id="send_snippet" type="submit" onclick="send()">Submit</button>
+    <br>
+    <h4><a href="/">Вернуться</a></h4>
+</form>
+
+<script>
+  function send() {
+    let object = {
+        "id": document.getElementById("id").value
+
+    };
+
+    let json = JSON.stringify(object);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", '/api/animal/find', false)
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.send(json);
+
+    if (xhr.status == 200) {
+      alert(xhr.response);
+
+    }
+    if (xhr.status == 400) {
+      alert("Registration failed. Current username already taken");
+    }
+}
+</script>
+</body>
+</html>

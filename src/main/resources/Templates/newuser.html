@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create</title>
+</head>
+<body>
+<form>
+  <br>
+  <label>Username<input id="username" type="text"/></label>
+  <br>
+  <label>Password<input id="password" type="password"/></label>
+  <br>
+  <button id="send_snippet" type="submit" onclick="send()">Submit</button>
+  <br>
+  <label>Username availability check<input id="username_check" type="text"/></label>
+  <br>
+  <button id="send_check" type="submit" onclick="checking()">Submit</button>
+  <br>
+  <br>
+  <h4><a href="/">Вернуться</a></h4>
+</form>
+
+<script>
+  function send() {
+    let object = {
+        "username": document.getElementById("username").value,
+        "password": document.getElementById("password").value
+
+    };
+
+    let json = JSON.stringify(object);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", '/api/user/registration', false)
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.send(json);
+
+    if (xhr.status == 200) {
+      alert("Registration complete");
+    }
+    if (xhr.status == 400) {
+      alert("Registration failed. Current username already taken");
+    }
+}
+
+  function checking() {
+    let object = {
+      "name": document.getElementById("username_check").value
+    };
+    let json = JSON.stringify(object);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", '/api/user/validation', false)
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.send(json);
+    alert(xhr.response);
+  }
+</script>
+</body>
+</html>
